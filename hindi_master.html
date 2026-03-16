@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Hindi Master — UP Police 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06080a;--bg2:#0d1014;--bg3:#121720;--bg4:#191f2a;
+  --bdr:#1f2836;--bdr2:#2a3850;
+  --t:#b0bcd0;--td:#4a5870;--tb:#e0e8f4;
+  --saf:#ff6b35;--safd:rgba(255,107,53,0.12);
+  --grn:#00e676;--grd:rgba(0,230,118,0.1);
+  --blu:#4fc3f7;--bld:rgba(79,195,247,0.1);
+  --yel:#ffd54f;--yeld:rgba(255,213,79,0.1);
+  --red:#ff5252;--redd:rgba(255,82,82,0.1);
+  --prpl:#ce93d8;--prpld:rgba(206,147,216,0.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;display:flex;flex-direction:column}
+
+/* ALERT */
+.alert{background:linear-gradient(90deg,rgba(255,107,53,0.15),rgba(255,213,79,0.08));border-bottom:1px solid rgba(255,107,53,0.3);padding:5px 14px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.alert span{font-size:11px;color:var(--saf);font-weight:700;letter-spacing:0.5px}
+.alert b{color:var(--tb)}
+
+/* HEADER */
+.hdr{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.logo{font-family:'Teko',sans-serif;font-size:22px;font-weight:700;color:var(--saf);letter-spacing:2px}
+.logo small{display:block;font-size:10px;color:var(--td);font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-top:-4px}
+.xp-box{text-align:right}
+.xp-num{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--yel)}
+.xp-lbl{font-size:9px;color:var(--td);letter-spacing:1px;text-transform:uppercase}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;overflow-x:hidden}
+.main::-webkit-scrollbar{width:2px}
+.main::-webkit-scrollbar-thumb{background:var(--bdr2)}
+
+/* BOTTOM NAV */
+.bnav{display:flex;background:var(--bg2);border-top:1px solid var(--bdr);flex-shrink:0}
+.nb{flex:1;padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;border:none;background:transparent;color:var(--td);font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:0.5px;text-transform:uppercase;transition:all 0.2s;position:relative}
+.nb.active{color:var(--saf)}
+.nb.active::after{content:'';position:absolute;top:0;left:25%;right:25%;height:2px;background:var(--saf);border-radius:0 0 3px 3px}
+.nb.g.active{color:var(--grn)}.nb.g.active::after{background:var(--grn)}
+.nb.b.active{color:var(--yel)}.nb.b.active::after{background:var(--yel)}
+.nb.p.active{color:var(--prpl)}.nb.p.active::after{background:var(--prpl)}
+.nb-icon{font-size:18px}
+
+/* SECTIONS */
+.sec{display:none;animation:fadeUp 0.2s ease}.sec.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── LEARN ── */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+.tc{background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:12px 10px;cursor:pointer;transition:all 0.2s;text-align:center;position:relative;overflow:hidden}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.tc:hover{transform:translateY(-2px)}
+.tc-icon{font-size:26px;margin-bottom:6px}
+.tc-name{font-family:'Teko',sans-serif;font-size:16px;font-weight:600;letter-spacing:1px;line-height:1.2}
+.tc-hindi{font-family:'Noto Sans Devanagari',sans-serif;font-size:11px;color:var(--td);margin-top:2px}
+.tc-qs{font-size:10px;color:var(--td);margin-top:4px}
+.tc-wt{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;font-family:'JetBrains Mono',monospace}
+
+.cpanel{display:none;padding:12px}.cpanel.open{display:block}
+.back-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;cursor:pointer}
+.back-arr{width:32px;height:32px;background:var(--bg3);border:1px solid var(--bdr);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all 0.2s}
+.back-arr:hover{border-color:var(--saf);color:var(--saf)}
+.back-ttl{font-family:'Teko',sans-serif;font-size:22px;color:var(--tb);letter-spacing:1.5px}
+
+.ccard{background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.ccard-hd{padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.ccard-icon{font-size:18px;flex-shrink:0}
+.ccard-ttl{font-family:'Teko',sans-serif;font-size:17px;color:var(--tb);letter-spacing:1px;flex:1}
+.ccard-chev{font-size:11px;color:var(--td);transition:transform 0.2s;flex-shrink:0}
+.ccard-chev.open{transform:rotate(90deg)}
+.ccard-body{display:none;padding:0 13px 13px;border-top:1px solid var(--bdr)}.ccard-body.open{display:block}
+
+.tbox{background:var(--bg4);border-left:3px solid var(--yel);border-radius:0 8px 8px 0;padding:10px 12px;margin:10px 0}
+.tbox-ttl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--yel);font-weight:700;margin-bottom:6px}
+.tbox-c{font-size:13px;color:var(--tb);line-height:1.8;font-family:'Barlow',sans-serif}
+.tbox-c .h1{color:var(--saf);font-weight:700}
+.tbox-c .h2{color:var(--yel);font-weight:700}
+.tbox-c .h3{color:var(--grn);font-weight:700}
+.tbox-c .h4{color:var(--blu);font-weight:700}
+.tbox-c .hd{font-family:'Noto Sans Devanagari',sans-serif}
+
+.ebox{background:rgba(79,195,247,0.04);border:1px solid rgba(79,195,247,0.2);border-radius:8px;padding:10px 12px;margin:8px 0}
+.ebox-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--blu);font-weight:700;margin-bottom:6px}
+.ebox-q{font-size:14px;color:var(--tb);margin-bottom:5px;font-weight:500;font-family:'Noto Sans Devanagari',sans-serif}
+.ebox-a{font-size:13px;color:var(--grn);font-family:'Noto Sans Devanagari',sans-serif}
+
+.trapbox{background:rgba(255,82,82,0.05);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:10px 12px;margin:8px 0}
+.trapbox-ttl{font-size:10px;letter-spacing:2px;color:var(--red);font-weight:700;margin-bottom:6px;text-transform:uppercase}
+
+.tlist{list-style:none;margin:8px 0}
+.tlist li{padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px;color:var(--t);display:flex;gap:8px;align-items:flex-start;line-height:1.5;font-family:'Noto Sans Devanagari',sans-serif}
+.tlist li:last-child{border:none}
+.tn{color:var(--saf);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:13px;flex-shrink:0;margin-top:1px}
+
+.table-wrap{overflow-x:auto;margin:10px 0;border-radius:8px;border:1px solid var(--bdr)}
+.dtable{width:100%;border-collapse:collapse;font-size:12px}
+.dtable th{background:var(--bg4);padding:8px 10px;text-align:left;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--td);font-weight:700;white-space:nowrap}
+.dtable td{padding:8px 10px;border-top:1px solid var(--bdr);color:var(--t);line-height:1.4;font-family:'Noto Sans Devanagari',sans-serif}
+.dtable tr:hover td{background:rgba(255,255,255,0.02)}
+.dtable td:first-child{color:var(--saf);font-weight:700;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:12px}
+
+/* ── PRACTICE ── */
+.phud{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border-bottom:1px solid var(--bdr);padding:9px 14px;position:sticky;top:0;z-index:10}
+.hb{text-align:center}
+.hv{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--tb)}
+.hl{font-size:9px;color:var(--td);letter-spacing:1px;text-transform:uppercase}
+.tstrip{height:3px;background:var(--saf);transition:width 0.1s linear}
+
+.tsel-row{display:flex;gap:6px;padding:10px 12px 6px;overflow-x:auto}
+.tsel-row::-webkit-scrollbar{display:none}
+.tsb{white-space:nowrap;padding:5px 11px;border-radius:20px;border:1px solid var(--bdr2);background:transparent;color:var(--td);font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;flex-shrink:0}
+.tsb.active{background:var(--safd);border-color:var(--saf);color:var(--saf)}
+
+.mode-row{display:flex;gap:6px;padding:0 12px 8px}
+.modb{flex:1;padding:7px 4px;border-radius:8px;border:1px solid var(--bdr2);background:transparent;color:var(--td);font-family:'Barlow',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;text-align:center}
+.modb.active,.modb:hover{border-color:var(--saf);color:var(--saf);background:var(--safd)}
+
+.qa{padding:12px}
+.qcard{background:var(--bg3);border:1px solid var(--bdr2);border-radius:14px;padding:16px 14px;margin-bottom:12px}
+.qtag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+.qnum{font-size:11px;color:var(--td);float:right;font-family:'JetBrains Mono',monospace}
+.qtext{font-size:15px;color:var(--tb);line-height:1.7;margin-bottom:6px;font-weight:500;font-family:'Noto Sans Devanagari',sans-serif}
+.qsub{font-size:12px;color:var(--td);margin-bottom:12px;line-height:1.5;font-family:'Noto Sans Devanagari',sans-serif}
+
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.obt{padding:11px 8px;border:2px solid var(--bdr2);border-radius:10px;background:var(--bg4);color:var(--tb);cursor:pointer;transition:all 0.15s;font-size:13px;font-weight:500;text-align:center;line-height:1.4;font-family:'Noto Sans Devanagari',sans-serif}
+.obt:hover:not(:disabled){border-color:var(--saf);background:var(--safd)}
+.obt.correct{border-color:var(--grn)!important;background:var(--grd)!important;color:var(--grn)!important;font-weight:700}
+.obt.wrong{border-color:var(--red)!important;background:var(--redd)!important;color:var(--red)!important}
+.obt:disabled{cursor:default}
+
+.expbox{display:none;margin-top:11px;background:var(--bg4);border-left:3px solid var(--grn);border-radius:0 8px 8px 0;padding:10px 12px}
+.expbox.show{display:block;animation:fadeUp 0.2s ease}
+.exp-ttl{font-size:10px;letter-spacing:2px;color:var(--grn);font-weight:700;text-transform:uppercase;margin-bottom:5px}
+.exp-txt{font-size:13px;color:var(--t);line-height:1.7;font-family:'Noto Sans Devanagari',sans-serif}
+.exp-txt b{color:var(--blu)}
+.exp-txt .trick{color:var(--yel);font-weight:700}
+
+.nxtbtn{width:100%;padding:13px;background:linear-gradient(135deg,var(--saf),#cc4a1a);border:none;border-radius:10px;color:#fff;font-family:'Teko',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.2s;margin-top:4px}
+.nxtbtn:hover{transform:translateY(-2px)}
+
+.pres{display:none;padding:18px 12px;text-align:center}
+.pres.show{display:block}
+.pres-ring{width:96px;height:96px;border-radius:50%;border:4px solid var(--saf);margin:0 auto 12px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pres-pct{font-family:'Teko',sans-serif;font-size:32px;color:var(--saf);font-weight:700;line-height:1}
+.pres-sub{font-size:10px;color:var(--td)}
+.pres-ttl{font-family:'Teko',sans-serif;font-size:26px;color:var(--tb);letter-spacing:2px;margin-bottom:4px}
+.pres-sc{font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--yel);margin-bottom:16px}
+.pres-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.prc{background:var(--bg3);border-radius:8px;padding:10px;text-align:center}
+.prv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--tb)}
+.prl{font-size:10px;color:var(--td);margin-top:2px}
+.rplybtn{width:100%;padding:12px;background:var(--safd);border:1px solid var(--saf);border-radius:10px;color:var(--saf);font-family:'Teko',sans-serif;font-size:18px;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.2s}
+.rplybtn:hover{background:var(--saf);color:#fff}
+
+/* ── OMR ── */
+.omr-setup{padding:12px}
+.omr-intro{background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:16px;margin-bottom:12px}
+.omr-ttl{font-family:'Teko',sans-serif;font-size:26px;font-weight:700;color:var(--tb);letter-spacing:2px;margin-bottom:4px}
+.omr-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0}
+.om{background:var(--bg4);border-radius:8px;padding:10px;text-align:center}
+.omv{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--yel)}
+.oml{font-size:10px;color:var(--td);letter-spacing:1px;text-transform:uppercase}
+.omr-startbtn{width:100%;padding:14px;background:linear-gradient(135deg,var(--saf),#cc4a1a);border:none;border-radius:12px;color:#fff;font-family:'Teko',sans-serif;font-size:22px;font-weight:700;letter-spacing:3px;cursor:pointer;transition:all 0.2s}
+.omr-startbtn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,107,53,0.3)}
+
+.omr-exam{display:none}.omr-exam.active{display:block}
+.omr-hd{position:sticky;top:0;z-index:20;background:var(--bg2);border-bottom:1px solid var(--bdr);padding:8px 14px}
+.omr-hdr{display:flex;align-items:center;justify-content:space-between}
+.otimer{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:var(--saf)}
+.otimer.warn{color:var(--yel)}.otimer.danger{color:var(--red);animation:blnk 1s infinite}
+@keyframes blnk{50%{opacity:0.5}}
+.opbar{height:4px;background:var(--bdr);margin-top:6px;border-radius:2px;overflow:hidden}
+.opfill{height:100%;background:var(--saf);border-radius:2px;transition:width 0.3s}
+.odots{display:flex;gap:3px;flex-wrap:wrap;margin-top:5px}
+.odot{width:13px;height:13px;border-radius:50%;background:var(--bdr);cursor:pointer;transition:all 0.2s;border:1px solid transparent;flex-shrink:0}
+.odot.ans{background:var(--yel)}.odot.cur{border-color:var(--saf);transform:scale(1.2)}.odot.flg{background:var(--red)}
+
+.omr-qa{padding:12px}
+.omr-qcard{background:var(--bg3);border:1px solid var(--bdr2);border-radius:12px;padding:14px;margin-bottom:10px}
+.omr-opts{display:grid;grid-template-columns:1fr;gap:7px;margin-bottom:10px}
+.omr-opt{display:flex;align-items:flex-start;gap:11px;padding:10px 11px;border:2px solid var(--bdr);border-radius:10px;cursor:pointer;transition:all 0.15s;background:var(--bg4)}
+.omr-opt:hover{border-color:var(--saf)}
+.omr-opt.sel{border-color:var(--saf);background:var(--safd)}
+.omr-bub{width:22px;height:22px;border-radius:50%;border:2px solid var(--td);flex-shrink:0;margin-top:1px;transition:all 0.15s;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.omr-opt.sel .omr-bub{background:var(--saf);border-color:var(--saf);color:#fff}
+.omr-otxt{font-size:14px;color:var(--tb);line-height:1.4;font-family:'Noto Sans Devanagari',sans-serif}
+.omr-navs{display:flex;gap:8px}
+.oprev,.onext{flex:1;padding:11px;border-radius:10px;border:1px solid var(--bdr2);background:var(--bg3);color:var(--t);font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.onext{background:var(--safd);border-color:var(--saf);color:var(--saf)}.onext:hover{background:var(--saf);color:#fff}
+.oflag{padding:11px 12px;border-radius:10px;border:1px solid var(--bdr2);background:var(--bg3);color:var(--td);font-size:16px;cursor:pointer;transition:all 0.2s}
+.oflag.flg{border-color:var(--red);color:var(--red);background:var(--redd)}
+.osubmit{width:100%;padding:13px;background:linear-gradient(135deg,var(--grn),#00a050);border:none;border-radius:12px;color:#000;font-family:'Teko',sans-serif;font-size:22px;font-weight:700;letter-spacing:3px;cursor:pointer;margin:10px 0}
+
+.omr-res{display:none;padding:12px}.omr-res.show{display:block}
+.srow{display:flex;align-items:center;gap:7px;margin-bottom:7px;font-size:12px;padding:4px 0;border-bottom:1px solid var(--bdr)}
+.srow:last-child{border:none}
+.sqn{width:28px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--td);flex-shrink:0}
+.sbubs{display:flex;gap:5px;flex:1}
+.sbub{width:21px;height:21px;border-radius:50%;border:1.5px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.sbub.c{background:var(--grn);border-color:var(--grn);color:#000}
+.sbub.w{background:var(--red);border-color:var(--red);color:#fff}
+.sstatus{font-size:11px;font-weight:700}
+.srs-box{background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:14px;margin-bottom:12px}
+
+/* PROGRESS */
+.prog-area{padding:12px}
+.ps-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.psc{background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:13px;text-align:center}
+.psv{font-family:'Teko',sans-serif;font-size:34px;font-weight:700;color:var(--tb);line-height:1}
+.psl{font-size:11px;color:var(--td);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.pbrow{background:var(--bg3);border:1px solid var(--bdr);border-radius:10px;padding:12px;margin-bottom:8px}
+.pbrl{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.pbrt{color:var(--t);font-weight:600}
+.pbrp{font-family:'JetBrains Mono',monospace;color:var(--saf)}
+.pbar{height:6px;background:var(--bdr);border-radius:3px;overflow:hidden}
+.pbfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--saf),var(--yel));transition:width 0.6s}
+.resetbtn{width:100%;padding:9px;background:transparent;border:1px solid rgba(255,82,82,0.3);border-radius:8px;color:var(--red);font-family:'Barlow',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
+.resetbtn:hover{background:var(--redd)}
+
+/* FLASH & TOAST */
+.flash{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:999}
+.flash.c{background:rgba(0,230,118,0.1)}.flash.w{background:rgba(255,82,82,0.1)}.flash.show{opacity:1}
+.toast{position:fixed;bottom:68px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--bg3);border:1px solid var(--bdr2);border-radius:10px;padding:9px 18px;font-size:13px;font-weight:600;color:var(--tb);z-index:1000;opacity:0;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div class="alert"><span>📚 HINDI</span><b>37-38 Questions • 74-76 Marks • NO Negative Marking — Attempt All!</b></div>
+<header class="hdr">
+  <div class="logo">HINDI MASTER<small>UP POLICE CONSTABLE 2026</small></div>
+  <div class="xp-box"><div class="xp-num" id="xpNum">0</div><div class="xp-lbl">XP</div></div>
+</header>
+<div class="main" id="mainDiv">
+
+<!-- ═══ LEARN ═══ -->
+<div class="sec active" id="sec-learn">
+  <div id="tgrid-wrap">
+    <div style="padding:10px 13px 4px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--td);font-weight:700">Tap topic to master it</div>
+    <div class="topic-grid" id="tgrid"></div>
+  </div>
+  <div class="cpanel" id="cpanel">
+    <div class="back-row" onclick="backToTopics()"><div class="back-arr">←</div><div class="back-ttl" id="cpttl">SANDHI</div></div>
+    <div id="cpContent"></div>
+  </div>
+</div>
+
+<!-- ═══ PRACTICE ═══ -->
+<div class="sec" id="sec-practice">
+  <div class="phud">
+    <div class="hb"><div class="hv" id="pQ">0/0</div><div class="hl">Question</div></div>
+    <div class="hb"><div class="hv" id="pSc">0</div><div class="hl">Score</div></div>
+    <div class="hb"><div class="hv" id="pStr">🔥0</div><div class="hl">Streak</div></div>
+    <div class="hb"><div class="hv" id="pTm" style="color:var(--saf)">∞</div><div class="hl">Secs</div></div>
+  </div>
+  <div class="tstrip" id="tstrip" style="width:100%"></div>
+  <div class="mode-row" style="padding:8px 12px 4px">
+    <button class="modb active" onclick="setMode('timed',this)">⏱ Timed</button>
+    <button class="modb" onclick="setMode('free',this)">∞ Free</button>
+    <button class="modb" onclick="setMode('hard',this)" style="border-color:rgba(255,82,82,0.3);color:var(--red)">🔥 Hard</button>
+  </div>
+  <div class="tsel-row" id="tselRow"></div>
+  <div class="qa" id="qaDiv"></div>
+  <div class="pres" id="pres">
+    <div class="pres-ring"><div class="pres-pct" id="resPct">0%</div></div>
+    <div class="pres-ttl" id="resT">DONE!</div>
+    <div class="pres-sc" id="resSc">Score: 0</div>
+    <div class="pres-grid" id="resGrid"></div>
+    <button class="rplybtn" onclick="restartP()">▶ PRACTICE AGAIN</button>
+  </div>
+</div>
+
+<!-- ═══ OMR ═══ -->
+<div class="sec" id="sec-omr">
+  <div class="omr-setup" id="omrSetup">
+    <div class="omr-intro">
+      <div class="omr-ttl">📋 OMR MOCK TEST</div>
+      <div style="font-size:12px;color:var(--td);margin-bottom:8px">Hindi Section — Real exam simulation</div>
+      <div class="omr-meta">
+        <div class="om"><div class="omv">37</div><div class="oml">Questions</div></div>
+        <div class="om"><div class="omv">74</div><div class="oml">Max Marks</div></div>
+        <div class="om"><div class="omv">30 min</div><div class="oml">Time</div></div>
+        <div class="om"><div class="omv" style="color:var(--grn)">ZERO</div><div class="oml">Negative</div></div>
+      </div>
+      <div style="font-size:12px;color:var(--td);line-height:1.6;margin-bottom:12px">
+        ✅ <b style="color:var(--grn)">Attempt EVERY question</b> — no penalty for wrong answers!<br>
+        💡 Sound check trick: Read options in your head — wrong grammar sounds awkward!
+      </div>
+      <button class="omr-startbtn" onclick="startOMR()">START EXAM →</button>
+    </div>
+    <div class="srs-box" id="prevResult" style="display:none">
+      <div style="font-family:'Teko',sans-serif;font-size:18px;color:var(--tb);letter-spacing:1.5px;margin-bottom:8px">LAST ATTEMPT</div>
+      <div id="prevStats"></div>
+    </div>
+  </div>
+  <div class="omr-exam" id="omrExam">
+    <div class="omr-hd">
+      <div class="omr-hdr">
+        <div><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--td)">Time Left</div><div class="otimer" id="otimer">30:00</div></div>
+        <div style="text-align:center"><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--td)">Answered</div><div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--yel)" id="oAns">0/37</div></div>
+        <div style="text-align:right"><div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--td)">Question</div><div style="font-family:'Teko',sans-serif;font-size:22px;color:var(--tb);font-weight:700" id="oQn">1/37</div></div>
+      </div>
+      <div class="opbar"><div class="opfill" id="opfill" style="width:0%"></div></div>
+      <div class="odots" id="odots"></div>
+    </div>
+    <div class="omr-qa">
+      <div class="omr-qcard" id="oqcard">
+        <div class="qtag" id="oqtag" style="background:var(--safd);color:var(--saf)">संधि</div>
+        <div style="font-size:15px;color:var(--tb);line-height:1.7;font-weight:500;margin-bottom:12px;font-family:'Noto Sans Devanagari',sans-serif" id="oqtext">Question</div>
+        <div class="omr-opts" id="obubs"></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <button class="oprev" onclick="oNav(-1)">← Prev</button>
+        <button class="oflag" id="oflagBtn" onclick="oToggleFlag()">🚩</button>
+        <button class="onext" onclick="oNav(1)">Next →</button>
+      </div>
+      <button class="osubmit" onclick="submitOMR()">SUBMIT EXAM ✓</button>
+    </div>
+  </div>
+  <div class="omr-res" id="omrRes">
+    <div style="text-align:center;padding:14px 0 6px">
+      <div style="font-size:50px;margin-bottom:6px" id="omrEmoji">🏆</div>
+      <div style="font-family:'Teko',sans-serif;font-size:30px;color:var(--tb);letter-spacing:2px" id="omrResT">EXCELLENT!</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:17px;color:var(--yel);margin-top:4px" id="omrResSc">74/74</div>
+    </div>
+    <div class="pres-grid" id="omrResGrid"></div>
+    <div style="font-family:'Teko',sans-serif;font-size:15px;color:var(--td);letter-spacing:2px;text-transform:uppercase;margin:10px 0 6px">OMR Answer Sheet</div>
+    <div class="srs-box" id="oSheet"></div>
+    <button class="rplybtn" style="margin-top:10px" onclick="resetOMR()">▶ TRY AGAIN</button>
+  </div>
+</div>
+
+<!-- ═══ PROGRESS ═══ -->
+<div class="sec" id="sec-progress">
+  <div class="prog-area">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--td);font-weight:700;margin-bottom:10px">Your Performance</div>
+    <div class="ps-grid" id="psSummary"></div>
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--td);font-weight:700;margin:12px 0 8px">Topic-wise Accuracy</div>
+    <div id="topicBars"></div>
+    <button class="resetbtn" onclick="resetAll()">Reset All Progress</button>
+  </div>
+</div>
+
+</div><!-- end main -->
+<nav class="bnav">
+  <button class="nb active" onclick="showSec('learn',this)"><span class="nb-icon">📖</span>Learn</button>
+  <button class="nb g" onclick="showSec('practice',this)"><span class="nb-icon">⚡</span>Practice</button>
+  <button class="nb b" onclick="showSec('omr',this)"><span class="nb-icon">📋</span>OMR</button>
+  <button class="nb p" onclick="showSec('progress',this)"><span class="nb-icon">📊</span>Progress</button>
+</nav>
+<div class="toast" id="toast"></div>
+<script>
+// ══════════════════════════════════
+// STORAGE
+// ══════════════════════════════════
+const sv=(k,v)=>{try{localStorage.setItem('hm26_'+k,JSON.stringify(v))}catch(e){}};
+const ld=(k,d)=>{try{const v=localStorage.getItem('hm26_'+k);return v?JSON.parse(v):d}catch(e){return d}};
+let xp=ld('xp',0),progress=ld('prog',{}),omrHist=ld('omrH',[]);
+const saveAll=()=>{sv('xp',xp);sv('prog',progress);sv('omrH',omrHist)};
+const updXP=()=>document.getElementById('xpNum').textContent=xp;
+
+// ══════════════════════════════════
+// TOPICS
+// ══════════════════════════════════
+const TOPICS=[
+  {id:'sandhi',n:'Sandhi',hi:'संधि',icon:'🔗',color:'#ff6b35',wt:'HIGH'},
+  {id:'samas',n:'Samas',hi:'समास',icon:'⚡',color:'#ffd54f',wt:'HIGH'},
+  {id:'karak',n:'Karak',hi:'कारक',icon:'🔗',color:'#4fc3f7',wt:'MED'},
+  {id:'lingvachan',n:'Ling-Vachan',hi:'लिंग-वचन',icon:'⚖️',color:'#ce93d8',wt:'MED'},
+  {id:'kaalvachya',n:'Kaal-Vachya',hi:'काल-वाच्य',icon:'⏳',color:'#80cbc4',wt:'MED'},
+  {id:'muhavare',n:'Muhavare',hi:'मुहावरे',icon:'💬',color:'#ff8a65',wt:'HIGH'},
+  {id:'paryay',n:'Paryayvachi',hi:'पर्यायवाची',icon:'🔄',color:'#aed581',wt:'HIGH'},
+  {id:'vilom',n:'Vilom Shabd',hi:'विलोम शब्द',icon:'↔️',color:'#4dd0e1',wt:'HIGH'},
+  {id:'ekshabd',n:'Ek Shabd',hi:'एक शब्द',icon:'📝',color:'#f06292',wt:'MED'},
+  {id:'vartani',n:'Vartani',hi:'वर्तनी शुद्धि',icon:'✏️',color:'#ffb74d',wt:'MED'},
+  {id:'ras',n:'Ras-Chhand',hi:'रस-छंद-अलंकार',icon:'🎭',color:'#ba68c8',wt:'LOW'},
+  {id:'kavi',n:'Kavi-Rachna',hi:'कवि और रचनाएँ',icon:'📚',color:'#81c784',wt:'LOW'},
+];
+
+// ══════════════════════════════════
+// CONCEPTS DATA
+// ══════════════════════════════════
+const CONCEPTS={
+  sandhi:{title:'SANDHI — संधि',cards:[
+    {icon:'📌',t:'What is Sandhi?',c:`<div class="tbox"><div class="tbox-ttl">परिभाषा (Definition)</div><div class="tbox-c">
+      दो वर्णों के मेल से जो विकार (परिवर्तन) होता है उसे <span class="h1">संधि</span> कहते हैं।<br>
+      देव + आलय = <span class="h2">देवालय</span> (अ+आ = आ)<br>
+      हिम + आलय = <span class="h3">हिमालय</span> (अ+आ = आ)
+    </div></div>
+    <div class="tbox"><div class="tbox-ttl">⚡ 3 Types — Exam में यही आता है</div><div class="tbox-c">
+      <span class="h1">1. स्वर संधि</span> — vowel + vowel<br>
+      <span class="h2">2. व्यंजन संधि</span> — consonant involved<br>
+      <span class="h3">3. विसर्ग संधि</span> — 'ः' involved
+    </div></div>`},
+    {icon:'🔴',t:'Type 1: Swar Sandhi (5 sub-types)',c:`<div class="tbox"><div class="tbox-ttl">📌 5 Sub-types with SHORTCUT</div><div class="tbox-c">
+      <span class="h1">दीर्घ संधि:</span> अ/आ + अ/आ = आ &nbsp;|&nbsp; इ/ई + इ/ई = ई &nbsp;|&nbsp; उ/ऊ + उ/ऊ = ऊ<br>
+      <b>Memory:</b> Same family vowels → long form<br><br>
+      <span class="h2">गुण संधि:</span> अ/आ + इ/ई = ए &nbsp;|&nbsp; अ/आ + उ/ऊ = ओ &nbsp;|&nbsp; अ/आ + ऋ = अर्<br>
+      <b>Memory: A + इ family = ए (Guna raise)</b><br><br>
+      <span class="h3">वृद्धि संधि:</span> अ/आ + ए/ऐ = ऐ &nbsp;|&nbsp; अ/आ + ओ/औ = औ<br>
+      <b>Memory: A + ए family = ऐ (bigger sound)</b><br><br>
+      <span class="h4">यण संधि:</span> इ/ई → य् &nbsp;|&nbsp; उ/ऊ → व् &nbsp;|&nbsp; ऋ → र् (before different vowel)<br>
+      <b>यदि + अपि = यद्यपि, अनु + एषण = अन्वेषण</b><br><br>
+      <span class="h1">अयादि संधि:</span> ए → अय् &nbsp;|&nbsp; ओ → अव् &nbsp;|&nbsp; ऐ → आय् &nbsp;|&nbsp; औ → आव्<br>
+      <b>ने + अन = नयन, पो + अन = पवन</b>
+    </div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q</div>
+    <div class="ebox-q">सूर्य + उदय = ?</div>
+    <div class="ebox-a">अ + उ = ओ (गुण संधि) → <b>सूर्योदय</b></div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q</div>
+    <div class="ebox-q">'देवेंद्र' में कौन-सी संधि है?</div>
+    <div class="ebox-a">देव + इंद्र = अ + इ = ए (गुण संधि)</div></div>`},
+    {icon:'🟡',t:'Type 2 & 3: Vyanjan + Visarg Sandhi',c:`<div class="tbox"><div class="tbox-ttl">व्यंजन संधि — KEY RULES</div><div class="tbox-c">
+      <span class="h1">Rule 1:</span> क्/च्/ट्/त्/प् + vowel/soft = voiced form<br>
+      वाक् + ईश = वागीश (क् → ग्)<br><br>
+      <span class="h2">Rule 2: म् + consonant = Anusvar (ं)</span><br>
+      सम् + तोष = <b>संतोष</b><br><br>
+      <span class="h3">Rule 3: त् + च = च्च</span><br>
+      उत् + चारण = <b>उच्चारण</b>
+    </div></div>
+    <div class="tbox"><div class="tbox-ttl">विसर्ग संधि — EXAM TRICK</div><div class="tbox-c">
+      <span class="h1">ः + क/ख/प/फ = ः (stays)</span><br>
+      निः + फल = <b>निष्फल</b><br><br>
+      <span class="h2">ः + vowel = remove ः + add vowel</span><br>
+      मनः + अनुकूल = <b>मनोनुकूल</b><br><br>
+      <span class="h3">Fast ID trick:</span> If word has two vowels meeting → स्वर संधि. If you see ः → विसर्ग संधि.
+    </div></div>`},
+    {icon:'⚡',t:'30-Second Solve Strategy',c:`<div class="tbox"><div class="tbox-ttl">EXAM SPEED METHOD</div><div class="tbox-c">
+      <b>Step 1:</b> Split the given word at junction<br>
+      <b>Step 2:</b> See what changed (अ+इ=ए? then गुण)<br>
+      <b>Step 3:</b> Match with option<br><br>
+      <span class="h1">Option Elimination:</span><br>
+      • If question shows vowel meeting → eliminate व्यंजन/विसर्ग options<br>
+      • If ः involved → it's विसर्ग संधि only<br>
+      • Wrong splits in options = eliminate instantly
+    </div></div>
+    <div class="trapbox"><div class="trapbox-ttl">⚠️ EXAM TRAPS</div><ul class="tlist">
+      <li><span class="tn">1</span>विद्यालय = विद्या+आलय (दीर्घ) NOT विद्य+आलय</li>
+      <li><span class="tn">2</span>Sandhi vs Samas — Sandhi = sound change, Samas = meaning join</li>
+      <li><span class="tn">3</span>नयन = ने+अन (अयादि) — ए→अय् → confusing but common exam Q</li>
+    </ul></div>`},
+  ]},
+  samas:{title:'SAMAS — समास',cards:[
+    {icon:'📌',t:'Samas क्या है और Types?',c:`<div class="tbox"><div class="tbox-ttl">परिभाषा + 6 Types Memory Hook</div><div class="tbox-c">
+      दो या दो से अधिक शब्दों का मिलकर एक नया शब्द बनाना <span class="h1">समास</span> कहलाता है।<br><br>
+      <span class="h1">MEMORY HOOK: "TD KD BD AV"</span><br>
+      <b>T</b>atpurush · <b>D</b>vigu · <b>K</b>armadharay · <b>D</b>vandva · <b>B</b>ahuvrihi · <b>A</b>vyayibhav
+    </div></div>
+    <div class="table-wrap"><table class="dtable">
+      <tr><th>Type</th><th>पहचान</th><th>Example</th></tr>
+      <tr><td>तत्पुरुष</td><td>का/की/के लगाओ</td><td>राजमार्ग = राजा का मार्ग</td></tr>
+      <tr><td>द्विगु</td><td>पहला शब्द = संख्या</td><td>त्रिभुज, पंचतंत्र, नवरात्र</td></tr>
+      <tr><td>कर्मधारय</td><td>विशेषण+संज्ञा / जैसा</td><td>नीलकमल, चरणकमल</td></tr>
+      <tr><td>द्वंद्व</td><td>'और' लगाओ दोनों बराबर</td><td>माता-पिता, राम-लक्ष्मण</td></tr>
+      <tr><td>बहुव्रीहि</td><td>तीसरे को describe करे</td><td>पीतांबर = कृष्ण</td></tr>
+      <tr><td>अव्ययीभाव</td><td>पहला शब्द = अव्यय</td><td>यथाशक्ति, प्रतिदिन, आजन्म</td></tr>
+    </table></div>`},
+    {icon:'🎯',t:'Quick Identification Trick — 3 Questions',c:`<div class="tbox"><div class="tbox-ttl">ASK IN THIS ORDER — 30 SECONDS!</div><div class="tbox-c">
+      <span class="h1">Q1: पहला शब्द संख्या है?</span> → हाँ = <b>द्विगु</b><br>
+      (तिरंगा, सप्ताह, चतुर्भुज)<br><br>
+      <span class="h2">Q2: 'और' लगा सकते हैं दोनों में?</span> → हाँ = <b>द्वंद्व</b><br>
+      (सुख-दुख, भाई-बहन, ऊँच-नीच)<br><br>
+      <span class="h3">Q3: तीसरी चीज़ describe होती है?</span> → हाँ = <b>बहुव्रीहि</b><br>
+      (दशानन = रावण, नीलकंठ = शिव, गिरिधर = कृष्ण)<br><br>
+      <span class="h4">बाकी: 'का/की/के'</span> → <b>तत्पुरुष</b><br>
+      <span class="h1">विशेषण+नाम</span> → <b>कर्मधारय</b><br>
+      <span class="h2">अव्यय पहले</span> → <b>अव्ययीभाव</b>
+    </div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q — HARD TYPE</div>
+    <div class="ebox-q">'चक्रपाणि' में कौन-सा समास है?</div>
+    <div class="ebox-a">चक्र हाथ में है जिसके = विष्णु → <b>बहुव्रीहि समास</b></div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q</div>
+    <div class="ebox-q">'यथाशक्ति' में कौन-सा समास है?</div>
+    <div class="ebox-a">यथा = अव्यय (according to) → <b>अव्ययीभाव समास</b></div></div>
+    <div class="trapbox"><div class="trapbox-ttl">⚠️ MOST CONFUSED PAIRS</div><ul class="tlist">
+      <li><span class="tn">!</span><b>नीलकमल:</b> नीला कमल = विशेषण+नाम = <span style="color:var(--grn)">कर्मधारय</span> ✓ (NOT बहुव्रीहि)</li>
+      <li><span class="tn">!</span><b>पीतांबर:</b> पीला वस्त्र है जिसका = <span style="color:var(--grn)">बहुव्रीहि</span> ✓ (refers to Krishna)</li>
+      <li><span class="tn">!</span><b>त्रिलोक:</b> तीन लोकों का समूह = <span style="color:var(--grn)">द्विगु</span> ✓</li>
+    </ul></div>`},
+  ]},
+  karak:{title:'KARAK — कारक',cards:[
+    {icon:'📌',t:'8 Karak + Vibhakti',c:`<div class="tbox"><div class="tbox-ttl">MEMORY HOOK — "कर्ता कर्म करण संप्रदान, अपादान संबंध अधिकरण, संबोधन"</div><div class="tbox-c">
+      <span class="h1">कर्ता कारक</span> — ने — राम<b>ने</b> खाया<br>
+      <span class="h2">कर्म कारक</span> — को — राम को बुलाया<br>
+      <span class="h3">करण कारक</span> — से/द्वारा — कलम<b>से</b> लिखा<br>
+      <span class="h4">संप्रदान</span> — को/के लिए — भूखे<b>के लिए</b><br>
+      <span class="h1">अपादान</span> — से (अलगाव) — पेड़<b>से</b> गिरा<br>
+      <span class="h2">संबंध</span> — का/की/के — राम<b>की</b> किताब<br>
+      <span class="h3">अधिकरण</span> — में/पर — घर<b>में</b> है<br>
+      <span class="h4">संबोधन</span> — हे/ओ/अरे — <b>हे</b> राम!
+    </div></div>`},
+    {icon:'⚡',t:'Trick to Differentiate Karana vs Apaadan',c:`<div class="tbox"><div class="tbox-ttl">BOTH USE 'से' — KEY DIFFERENCE</div><div class="tbox-c">
+      <span class="h1">करण 'से'</span> = साधन/माध्यम (instrument/by which)<br>
+      "चाकू <b>से</b> काटा" — चाकू = साधन = <b>करण</b><br><br>
+      <span class="h2">अपादान 'से'</span> = अलगाव/निकलना (separation/origin)<br>
+      "पेड़ <b>से</b> गिरा" — पेड़ से अलग हुआ = <b>अपादान</b><br><br>
+      <span class="h3">QUICK TEST:</span> क्या यह 'जरिए' है? → करण. क्या यह 'अलग' है? → अपादान
+    </div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q</div>
+    <div class="ebox-q">"उसने आँखों से देखा" — रेखांकित शब्द का कारक?</div>
+    <div class="ebox-a">आँखें = देखने का साधन → <b>करण कारक</b></div></div>`},
+  ]},
+  lingvachan:{title:'LING-VACHAN — लिंग-वचन',cards:[
+    {icon:'⚖️',t:'Ling (Gender) Rules',c:`<div class="tbox"><div class="tbox-ttl">पुल्लिंग vs स्त्रीलिंग — QUICK RULES</div><div class="tbox-c">
+      <span class="h1">पुल्लिंग suffixes:</span> आ (लड़का), अ (राम), ता/त्व/पन/न<br>
+      <span class="h2">स्त्रीलिंग suffixes:</span> ई/इ (लड़की), आनी/इन/नी/आइन<br>
+      <span class="h3">Always पुल्लिंग:</span> देश, समय, पहाड़, सागर, पेड़<br>
+      <span class="h4">Always स्त्रीलिंग:</span> नदी, भाषा, बोली, किताब, शाखा
+    </div></div>
+    <div class="tbox"><div class="tbox-ttl">TRICKY EXCEPTIONS — रट लो!</div><div class="tbox-c">
+      <span class="h1">Tricky पुल्लिंग:</span> जल, दूध, दही, मक्खन, घी, तेल, आटा, शहद, कागज<br>
+      <span class="h2">Tricky स्त्रीलिंग:</span> चाय, दाल, सब्जी, रात, बात, आँख, उम्र, आग<br>
+      <span class="h3">Both (context):</span> डॉक्टर, किसान, नेता, मंत्री
+    </div></div>`},
+    {icon:'🔢',t:'Vachan (Number) Rules',c:`<div class="tbox"><div class="tbox-ttl">एकवचन → बहुवचन RULES</div><div class="tbox-c">
+      <span class="h1">आ → एँ:</span> लड़का → लड़के (m), किताब → किताबें (f)<br>
+      <span class="h2">इ/ई → इयाँ:</span> लड़की → लड़कियाँ, नदी → नदियाँ<br>
+      <span class="h3">Always एकवचन:</span> जनता, सेना, पानी, आकाश, प्रेम, क्रोध<br>
+      <span class="h4">Always बहुवचन:</span> आँसू, दर्शन, प्राण, हस्ताक्षर, अक्षत
+    </div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q</div>
+    <div class="ebox-q">'मुनि' का बहुवचन क्या है?</div>
+    <div class="ebox-a">इ → इयाँ → <b>मुनिगण</b> (संस्कृत word uses गण/वर्ग)</div></div>`},
+  ]},
+  kaalvachya:{title:'KAAL-VACHYA — काल-वाच्य',cards:[
+    {icon:'⏳',t:'Kaal (Tense) — 3 Main Types',c:`<div class="tbox"><div class="tbox-ttl">VERB ENDING = TENSE</div><div class="tbox-c">
+      <span class="h1">वर्तमान काल:</span> रहा है/हूँ/हैं/हो, ता है/ती है<br>
+      Examples: वह खा <b>रहा है</b>, राम जा <b>ता है</b><br><br>
+      <span class="h2">भूतकाल:</span> था/थी/थे, चुका/चुकी, लिया, गया<br>
+      Examples: वह गया <b>था</b>, मैंने खा <b>लिया</b><br><br>
+      <span class="h3">भविष्यत् काल:</span> गा/गी/गे<br>
+      Examples: वह जाए<b>गा</b>, हम पढ़ें<b>गे</b>
+    </div></div>`},
+    {icon:'🎭',t:'Vachya (Voice) — 3 Types',c:`<div class="tbox"><div class="tbox-ttl">VACHYA IDENTIFICATION TRICK</div><div class="tbox-c">
+      <span class="h1">कर्तृवाच्य:</span> कर्ता मुख्य — <b>राम</b> खाता है (ने/ने नहीं लेकिन कर्ता active)<br>
+      <span class="h2">कर्मवाच्य:</span> कर्म मुख्य — राम द्वारा <b>खाया जाता है</b><br>
+      जाता है/जाती है/जाते हैं + द्वारा = कर्मवाच्य<br>
+      <span class="h3">भाववाच्य:</span> न कर्ता न कर्म — <b>यहाँ बैठा नहीं जाता</b><br>
+      अकर्मक क्रिया + नहीं जाता = भाववाच्य
+    </div></div>
+    <div class="ebox"><div class="ebox-lbl">EXAM Q</div>
+    <div class="ebox-q">"मुझसे चला नहीं जाता" — वाच्य?</div>
+    <div class="ebox-a">कर्ता/कर्म मुख्य नहीं, भाव मुख्य → <b>भाववाच्य</b></div></div>`},
+  ]},
+  muhavare:{title:'MUHAVARE — मुहावरे',cards:[
+    {icon:'💡',t:'Solve Strategy — Don\'t Translate Literally!',c:`<div class="tbox"><div class="tbox-ttl">⚡ EMOTION CHECK METHOD</div><div class="tbox-c">
+      Step 1: Is the muhavara <span class="h1">positive</span> or <span class="h2">negative</span>?<br>
+      Step 2: Eliminate options with opposite emotion<br>
+      Step 3: Check key word (पानी, आग, हाथ, मुँह)<br><br>
+      <span class="h3">'पानी' muhavare:</span> पानी उतरना = इज्जत जाना (negative)<br>
+      <span class="h3">'आग' muhavare:</span> usually strong emotion, anger
+    </div></div>`},
+    {icon:'📋',t:'Top 50 Muhavare — HIGH FREQUENCY',c:`<div class="table-wrap"><table class="dtable">
+      <tr><th>मुहावरा</th><th>अर्थ</th></tr>
+      <tr><td>अंधे की लाठी</td><td>एकमात्र सहारा</td></tr>
+      <tr><td>अक्ल पर पत्थर पड़ना</td><td>बुद्धि भ्रष्ट होना</td></tr>
+      <tr><td>अपना उल्लू सीधा करना</td><td>स्वार्थ सिद्ध करना</td></tr>
+      <tr><td>आँखें चुराना</td><td>सामने न आना / कतराना</td></tr>
+      <tr><td>आँखें खुलना</td><td>होश आना / सच्चाई दिखना</td></tr>
+      <tr><td>आग बबूला होना</td><td>बहुत क्रोधित होना</td></tr>
+      <tr><td>आस्तीन का साँप</td><td>विश्वासघाती / कपटी मित्र</td></tr>
+      <tr><td>ईंट से ईंट बजाना</td><td>नष्ट कर देना</td></tr>
+      <tr><td>उल्टी गंगा बहाना</td><td>परंपरा के विरुद्ध काम</td></tr>
+      <tr><td>कमर कसना</td><td>तैयार होना</td></tr>
+      <tr><td>कलेजा थामना</td><td>दुख सहना</td></tr>
+      <tr><td>खून पसीना एक करना</td><td>बहुत मेहनत करना</td></tr>
+      <tr><td>गड़े मुर्दे उखाड़ना</td><td>पुरानी बातें उठाना</td></tr>
+      <tr><td>घड़ों पानी पड़ना</td><td>बहुत लज्जित होना</td></tr>
+      <tr><td>चैन की बंसी बजाना</td><td>सुखपूर्वक रहना</td></tr>
+      <tr><td>जल में रहकर मगर से बैर</td><td>जहाँ रहो वहाँ दुश्मनी न करो</td></tr>
+      <tr><td>टाँग अड़ाना</td><td>बेवजह दखल देना</td></tr>
+      <tr><td>दाँत खट्टे करना</td><td>हरा देना / पराजित करना</td></tr>
+      <tr><td>दाल में काला होना</td><td>कुछ गड़बड़ होना</td></tr>
+      <tr><td>दिन दूनी रात चौगुनी</td><td>बहुत तेज़ी से बढ़ना</td></tr>
+      <tr><td>नाक में दम करना</td><td>बहुत परेशान करना</td></tr>
+      <tr><td>पानी-पानी होना</td><td>बहुत लज्जित होना</td></tr>
+      <tr><td>बाल की खाल निकालना</td><td>बारीकी से आलोचना</td></tr>
+      <tr><td>भीगी बिल्ली बनना</td><td>डरे हुए जैसा व्यवहार</td></tr>
+      <tr><td>मन में लड्डू फूटना</td><td>बहुत खुश होना</td></tr>
+      <tr><td>मुँह में पानी आना</td><td>लालच होना</td></tr>
+      <tr><td>लोहे के चने चबाना</td><td>बहुत कठिन काम</td></tr>
+      <tr><td>हाथ पर हाथ धरना</td><td>बेकार बैठे रहना</td></tr>
+      <tr><td>हाथ धोकर पीछे पड़ना</td><td>लगातार पीछे पड़ना</td></tr>
+      <tr><td>ऊँट के मुँह में जीरा</td><td>जरूरत से बहुत कम</td></tr>
+    </table></div>`},
+  ]},
+  paryay:{title:'PARYAYVACHI — पर्यायवाची',cards:[
+    {icon:'🔄',t:'Strategy + High-Frequency Words',c:`<div class="tbox"><div class="tbox-ttl">⚡ EXAM STRATEGY</div><div class="tbox-c">
+      2 options मिलते-जुलते हैं → उनमें से एक सही है<br>
+      Root word देखो: <span class="h1">सु</span> = अच्छा, <span class="h2">दु/दुर</span> = बुरा<br>
+      <span class="h3">Foreign-sounding option → usually wrong for pure Hindi word</span>
+    </div></div>
+    <div class="table-wrap"><table class="dtable">
+      <tr><th>शब्द</th><th>पर्यायवाची</th></tr>
+      <tr><td>आँख</td><td>नेत्र, नयन, लोचन, दृग, अक्षि, चक्षु</td></tr>
+      <tr><td>आकाश</td><td>गगन, नभ, अम्बर, व्योम, अनंत</td></tr>
+      <tr><td>अग्नि</td><td>आग, पावक, दहन, ज्वाला, वायुसखा</td></tr>
+      <tr><td>अश्व</td><td>घोड़ा, हय, तुरंग, वाजि, सैंधव</td></tr>
+      <tr><td>पानी</td><td>जल, नीर, वारि, तोय, अम्बु, उदक</td></tr>
+      <tr><td>पृथ्वी</td><td>धरती, वसुधा, भूमि, धरा, अवनि, मही</td></tr>
+      <tr><td>सूर्य</td><td>रवि, भानु, दिनकर, प्रभाकर, आदित्य</td></tr>
+      <tr><td>चंद्रमा</td><td>शशि, इंदु, चाँद, राकेश, निशाकर</td></tr>
+      <tr><td>राजा</td><td>नृप, भूपति, महीपाल, नरेश, भूपाल</td></tr>
+      <tr><td>वायु</td><td>पवन, हवा, समीर, अनिल, मारुत</td></tr>
+      <tr><td>नदी</td><td>तटिनी, सरिता, निर्झरिणी, प्रवाहिनी</td></tr>
+      <tr><td>वृक्ष</td><td>पेड़, तरु, पादप, विटप, द्रुम</td></tr>
+      <tr><td>स्त्री</td><td>नारी, महिला, वनिता, अंगना, कामिनी</td></tr>
+      <tr><td>कमल</td><td>पद्म, राजीव, नलिन, सरोज, पुंडरीक</td></tr>
+      <tr><td>साँप</td><td>सर्प, नाग, विषधर, व्याल, अहि</td></tr>
+    </table></div>`},
+  ]},
+  vilom:{title:'VILOM SHABD — विलोम',cards:[
+    {icon:'↔️',t:'Antonyms — Prefix Method + List',c:`<div class="tbox"><div class="tbox-ttl">PREFIX TRICK — INSTANT VILOM</div><div class="tbox-c">
+      <span class="h1">अ/अन + word:</span> सुंदर→असुंदर, ज्ञान→अज्ञान, उचित→अनुचित<br>
+      <span class="h2">नि/निर + word:</span> सफल→निष्फल, दोष→निर्दोष<br>
+      <span class="h3">वि + word:</span> श्वास→निश्वास<br>
+      <span class="h4">दुर + word:</span> भाग्य→दुर्भाग्य
+    </div></div>
+    <div class="table-wrap"><table class="dtable">
+      <tr><th>शब्द</th><th>विलोम</th><th>शब्द</th><th>विलोम</th></tr>
+      <tr><td>उचित</td><td>अनुचित</td><td>स्थावर</td><td>जंगम</td></tr>
+      <tr><td>सुबह</td><td>शाम</td><td>कृतज्ञ</td><td>कृतघ्न</td></tr>
+      <tr><td>सूक्ष्म</td><td>स्थूल</td><td>विधवा</td><td>सधवा</td></tr>
+      <tr><td>साकार</td><td>निराकार</td><td>सगुण</td><td>निर्गुण</td></tr>
+      <tr><td>लौकिक</td><td>अलौकिक</td><td>आस्तिक</td><td>नास्तिक</td></tr>
+      <tr><td>क्रय</td><td>विक्रय</td><td>अनुकूल</td><td>प्रतिकूल</td></tr>
+      <tr><td>मधुर</td><td>कटु</td><td>सन्मार्ग</td><td>कुमार्ग</td></tr>
+      <tr><td>आदान</td><td>प्रदान</td><td>स्वाधीन</td><td>पराधीन</td></tr>
+    </table></div>`},
+  ]},
+  ekshabd:{title:'EK SHABD — एक शब्द',cards:[
+    {icon:'📝',t:'One Word Substitution — Prefix Pattern',c:`<div class="tbox"><div class="tbox-ttl">SUFFIX/PREFIX PATTERN</div><div class="tbox-c">
+      <span class="h1">'जो न हो' → अ + शब्द:</span><br>
+      जो मरे नहीं = अमर, जो जीता न जाए = अजेय<br><br>
+      <span class="h2">'ज्ञान/विद्या' → वेत्ता/ज्ञ suffix:</span><br>
+      सब जानने वाला = सर्वज्ञ, ईश्वर में विश्वास = आस्तिक<br><br>
+      <span class="h3">'करने वाला' → कर्ता suffix:</span><br>
+      सृष्टि बनाने वाला = सृष्टिकर्ता
+    </div></div>
+    <div class="table-wrap"><table class="dtable">
+      <tr><th>वाक्यांश</th><th>एक शब्द</th></tr>
+      <tr><td>जो कभी न मरे</td><td>अमर</td></tr>
+      <tr><td>जिसे जीता न जा सके</td><td>अजेय</td></tr>
+      <tr><td>जो ईश्वर में विश्वास रखे</td><td>आस्तिक</td></tr>
+      <tr><td>जो ईश्वर में विश्वास न रखे</td><td>नास्तिक</td></tr>
+      <tr><td>सब कुछ जानने वाला</td><td>सर्वज्ञ</td></tr>
+      <tr><td>जिसका कोई आकार न हो</td><td>निराकार</td></tr>
+      <tr><td>जो बहुत कम बोले</td><td>मितभाषी</td></tr>
+      <tr><td>जो देखने योग्य हो</td><td>दर्शनीय</td></tr>
+      <tr><td>वह भूमि जहाँ फ़सल न उगे</td><td>ऊसर/बंजर</td></tr>
+      <tr><td>जो दूसरे देश से आया हो</td><td>विदेशी/परदेसी</td></tr>
+      <tr><td>जिसकी कोई उपमा न हो</td><td>अनुपम/अतुलनीय</td></tr>
+      <tr><td>जो पहले कभी न हुआ हो</td><td>अभूतपूर्व</td></tr>
+    </table></div>`},
+  ]},
+  vartani:{title:'VARTANI — वर्तनी शुद्धि',cards:[
+    {icon:'✏️',t:'Common Spelling Errors + Rules',c:`<div class="tbox"><div class="tbox-ttl">TOP 5 ERROR CATEGORIES IN EXAM</div><div class="tbox-c">
+      <span class="h1">1. इ vs ई:</span> प्रतिदिन✓ (NOT प्रतीदिन), विदेश✓, विद्यालय✓<br>
+      <span class="h2">2. ष vs श vs स:</span> परीक्षा✓ (NOT परीक्षा/परिक्षा), विशेष✓<br>
+      <span class="h3">3. ड़ vs ड:</span> पढ़ना✓, लड़का✓, पड़ोसी✓<br>
+      <span class="h4">4. अनुनासिक (ँ) vs अनुस्वार (ं):</span><br>
+      ँ = nasalized: हँसना, आँख, चाँद<br>
+      ं = अनुस्वार: संगम, रंग, अंग<br><br>
+      <span class="h1">5. विसर्ग (ः):</span> दुःख✓, अतः✓, प्रायः✓
+    </div></div>
+    <div class="table-wrap"><table class="dtable">
+      <tr><th>गलत</th><th>सही</th><th>गलत</th><th>सही</th></tr>
+      <tr><td>परीक्षा</td><td>परीक्षा✓</td><td>शुश्रुषा</td><td>शुश्रूषा✓</td></tr>
+      <tr><td>उज्वल</td><td>उज्ज्वल✓</td><td>उपलक्ष</td><td>उपलक्ष्य✓</td></tr>
+      <tr><td>पूज्यनीय</td><td>पूजनीय✓</td><td>दंपती</td><td>दंपति✓</td></tr>
+      <tr><td>प्रसंसा</td><td>प्रशंसा✓</td><td>श्रृंगार</td><td>शृंगार✓</td></tr>
+      <tr><td>स्वास्थ</td><td>स्वास्थ्य✓</td><td>महत्वपूर्ण</td><td>महत्त्वपूर्ण✓</td></tr>
+    </table></div>`},
+  ]},
+  ras:{title:'RAS-CHHAND-ALANKAR — रस-छंद-अलंकार',cards:[
+    {icon:'🎭',t:'9 Ras — Memory Hook',c:`<div class="tbox"><div class="tbox-ttl">MEMORY: "श हा क रौ वी भ बी अद् शा"</div><div class="tbox-c">
+      <span class="h1">शृंगार</span> — प्रेम/सौंदर्य (Love/Beauty)<br>
+      <span class="h2">हास्य</span> — हँसी/विनोद (Comedy/Humor)<br>
+      <span class="h3">करुण</span> — दुख/वेदना (Sadness/Grief)<br>
+      <span class="h4">रौद्र</span> — क्रोध (Anger/Fury)<br>
+      <span class="h1">वीर</span> — उत्साह/साहस (Heroism/Bravery)<br>
+      <span class="h2">भयानक</span> — डर (Fear/Horror)<br>
+      <span class="h3">बीभत्स</span> — घृणा (Disgust/Repulsion)<br>
+      <span class="h4">अद्भुत</span> — आश्चर्य (Wonder/Amazement)<br>
+      <span class="h1">शांत</span> — वैराग्य/शांति (Peace/Detachment)
+    </div></div>
+    <div class="tbox"><div class="tbox-ttl">INSTANT IDENTIFICATION TRICK</div><div class="tbox-c">
+      युद्ध/तलवार → <span class="h1">वीर रस</span><br>
+      प्रेम/नायक-नायिका → <span class="h2">शृंगार रस</span><br>
+      मृत्यु/बिछड़ना → <span class="h3">करुण रस</span><br>
+      हँसी/मजाक → <span class="h4">हास्य रस</span><br>
+      भूत/अँधेरा → <span class="h1">भयानक रस</span>
+    </div></div>`},
+    {icon:'📏',t:'Chhand — Basic Types',c:`<div class="tbox"><div class="tbox-ttl">DOHA vs CHAUPAI vs SORTHA</div><div class="tbox-c">
+      <span class="h1">दोहा:</span> विषम चरण=13 मात्रा, सम चरण=11 मात्रा<br>
+      <span class="h2">सोरठा:</span> दोहा का उल्टा — सम=11, विषम=13<br>
+      <span class="h3">चौपाई:</span> 4 चरण, प्रत्येक=16 मात्रा (Ramcharitmanas)<br>
+      <span class="h4">सवैया:</span> 22-26 वर्ण per चरण, मात्रिक छंद
+    </div></div>`},
+    {icon:'✨',t:'Alankar — Top 5 for Exam',c:`<div class="tbox"><div class="tbox-ttl">MOST ASKED IN UP POLICE</div><div class="tbox-c">
+      <span class="h1">अनुप्रास:</span> same consonant repeated<br>
+      "कामिनी कमल कली सी कोमल" — क क क क<br><br>
+      <span class="h2">यमक:</span> same word, different meaning<br>
+      "कनक कनक ते सौ गुनी" — कनक=सोना, कनक=धतूरा<br><br>
+      <span class="h3">श्लेष:</span> one word, multiple meanings simultaneously<br>
+      "रहिमन पानी राखिए" — पानी=जल/इज्जत/चमक<br><br>
+      <span class="h4">उपमा:</span> जैसा/सा/ज्यों comparison<br>
+      "मुख चंद्रमा जैसा सुंदर"<br><br>
+      <span class="h1">रूपक:</span> direct identification (जैसा नहीं)<br>
+      "मुख चंद्रमा है" (not जैसा)
+    </div></div>`},
+  ]},
+  kavi:{title:'KAVI AUR RACHNAYEN — कवि और रचनाएँ',cards:[
+    {icon:'📚',t:'Famous Hindi Poets & Works',c:`<div class="table-wrap"><table class="dtable">
+      <tr><th>कवि/लेखक</th><th>प्रमुख रचनाएँ</th><th>युग</th></tr>
+      <tr><td>तुलसीदास</td><td>रामचरितमानस, विनय पत्रिका, कवितावली</td><td>भक्तिकाल</td></tr>
+      <tr><td>कबीरदास</td><td>बीजक, साखी, सबद</td><td>भक्तिकाल</td></tr>
+      <tr><td>सूरदास</td><td>सूरसागर, सूरसारावली</td><td>भक्तिकाल</td></tr>
+      <tr><td>मीराबाई</td><td>मीरा पदावली, राग गोविंद</td><td>भक्तिकाल</td></tr>
+      <tr><td>जायसी</td><td>पद्मावत, अखरावट</td><td>भक्तिकाल</td></tr>
+      <tr><td>बिहारी</td><td>बिहारी सतसई</td><td>रीतिकाल</td></tr>
+      <tr><td>भारतेंदु हरिश्चंद्र</td><td>अंधेर नगरी, भारत दुर्दशा</td><td>आधुनिक</td></tr>
+      <tr><td>मैथिलीशरण गुप्त</td><td>भारत-भारती, साकेत, यशोधरा</td><td>आधुनिक</td></tr>
+      <tr><td>जयशंकर प्रसाद</td><td>कामायनी, आँसू, चित्राधार</td><td>छायावाद</td></tr>
+      <tr><td>सुमित्रानंदन पंत</td><td>पल्लव, चिदंबरा, युगांत</td><td>छायावाद</td></tr>
+      <tr><td>महादेवी वर्मा</td><td>यामा, निहार, नीरजा</td><td>छायावाद</td></tr>
+      <tr><td>सूर्यकांत त्रिपाठी 'निराला'</td><td>अनामिका, तुलसीदास, राम की शक्तिपूजा</td><td>छायावाद</td></tr>
+      <tr><td>प्रेमचंद</td><td>गोदान, गबन, सेवासदन, निर्मला</td><td>आधुनिक गद्य</td></tr>
+      <tr><td>हरिवंश राय बच्चन</td><td>मधुशाला, मधुबाला, अग्निपथ</td><td>हालावाद</td></tr>
+      <tr><td>रामधारी सिंह दिनकर</td><td>रश्मिरथी, उर्वशी, कुरुक्षेत्र</td><td>आधुनिक</td></tr>
+    </table></div>`},
+    {icon:'🏆',t:'Hindi Puraskar — Awards',c:`<div class="table-wrap"><table class="dtable">
+      <tr><th>पुरस्कार</th><th>दिया जाता है</th><th>महत्व</th></tr>
+      <tr><td>ज्ञानपीठ पुरस्कार</td><td>हिंदी/भारतीय भाषा के लेखक</td><td>सर्वोच्च साहित्य पुरस्कार</td></tr>
+      <tr><td>साहित्य अकादमी</td><td>उत्कृष्ट साहित्यिक कार्य</td><td>22 भाषाओं में</td></tr>
+      <tr><td>व्यास सम्मान</td><td>हिंदी साहित्यकार</td><td>K.K. Birla Foundation</td></tr>
+      <tr><td>राष्ट्रभाषा गौरव पुरस्कार</td><td>हिंदी प्रचार-प्रसार</td><td>UP Govt.</td></tr>
+    </table></div>`},
+  ]},
+};
+
+// ══════════════════════════════════
+// QUESTION BANK
+// ══════════════════════════════════
+const QB=[
+  // SANDHI
+  {id:1,t:'sandhi',l:'easy',q:'सूर्य + उदय = ?',o:['सूर्यादय','सूर्योदय','सूर्युदय','सूरुदय'],a:1,exp:'अ + उ = ओ (गुण संधि) → <b>सूर्योदय</b>',tag:'गुण संधि'},
+  {id:2,t:'sandhi',l:'med',q:'\'देवेंद्र\' में कौन-सी संधि है?',o:['दीर्घ संधि','गुण संधि','वृद्धि संधि','यण संधि'],a:1,exp:'देव + इंद्र = अ + इ = ए → <b>गुण संधि</b>',tag:'संधि पहचान'},
+  {id:3,t:'sandhi',l:'med',q:'\'हिमालय\' का सही संधि-विच्छेद क्या है?',o:['हिम + आलय','हिमा + लय','हि + मालय','हिमाल + य'],a:0,exp:'हिम + आलय = अ + आ = आ (दीर्घ संधि) → <b>हिमालय</b>',tag:'संधि विच्छेद'},
+  {id:4,t:'sandhi',l:'hard',q:'\'उच्चारण\' में कौन-सी संधि है?',o:['स्वर संधि','व्यंजन संधि','विसर्ग संधि','इनमें से कोई नहीं'],a:1,exp:'उत् + चारण = त् + च = च्च → <b>व्यंजन संधि</b>',tag:'व्यंजन संधि'},
+  {id:5,t:'sandhi',l:'med',q:'यण संधि का उदाहरण है?',o:['देवालय','सूर्योदय','यद्यपि','महोत्सव'],a:2,exp:'यदि + अपि = इ → य् (यण संधि) → <b>यद्यपि</b>',tag:'यण संधि'},
+  {id:6,t:'sandhi',l:'hard',q:'\'नयन\' का संधि-विच्छेद है?',o:['न + यन','ने + अन','नय + न','ना + यन'],a:1,exp:'ने + अन = ए → अय् (अयादि संधि) → <b>नयन</b>',tag:'अयादि संधि'},
+  {id:7,t:'sandhi',l:'med',q:'\'निर्धन\' में कौन-सी संधि है?',o:['स्वर संधि','व्यंजन संधि','विसर्ग संधि','कोई संधि नहीं'],a:2,exp:'नि: + धन → विसर्ग के बाद ध् → <b>विसर्ग संधि</b>',tag:'विसर्ग संधि'},
+  {id:8,t:'sandhi',l:'easy',q:'\'पवन\' का सही संधि-विच्छेद क्या है?',o:['पव + न','पो + अन','प + वन','पौ + अन'],a:1,exp:'पो + अन = ओ → अव् (अयादि) → पवन. <b>पो + अन</b>',tag:'अयादि संधि'},
+  // SAMAS
+  {id:9,t:'samas',l:'easy',q:'\'तिरंगा\' में कौन-सा समास है?',o:['तत्पुरुष','द्विगु','द्वंद्व','बहुव्रीहि'],a:1,exp:'तीन + रंग → पहला शब्द संख्या (तीन) → <b>द्विगु समास</b>',tag:'द्विगु'},
+  {id:10,t:'samas',l:'easy',q:'\'माता-पिता\' में कौन-सा समास है?',o:['द्वंद्व','तत्पुरुष','कर्मधारय','बहुव्रीहि'],a:0,exp:'माता और पिता — दोनों बराबर, बीच में \'और\' → <b>द्वंद्व समास</b>',tag:'द्वंद्व'},
+  {id:11,t:'samas',l:'med',q:'\'नीलकमल\' में कौन-सा समास है?',o:['तत्पुरुष','द्विगु','कर्मधारय','बहुव्रीहि'],a:2,exp:'नीला कमल = विशेषण + संज्ञा → <b>कर्मधारय समास</b>',tag:'कर्मधारय'},
+  {id:12,t:'samas',l:'med',q:'\'पीतांबर\' में कौन-सा समास है?',o:['कर्मधारय','बहुव्रीहि','तत्पुरुष','द्वंद्व'],a:1,exp:'पीत वस्त्र है जिसका (कृष्ण) = तीसरे को describe → <b>बहुव्रीहि समास</b>',tag:'बहुव्रीहि'},
+  {id:13,t:'samas',l:'med',q:'\'यथाशक्ति\' में कौन-सा समास है?',o:['तत्पुरुष','अव्ययीभाव','द्वंद्व','द्विगु'],a:1,exp:'यथा = अव्यय (according to), पहला पद अव्यय → <b>अव्ययीभाव समास</b>',tag:'अव्ययीभाव'},
+  {id:14,t:'samas',l:'hard',q:'\'चक्रपाणि\' में कौन-सा समास है?',o:['तत्पुरुष','कर्मधारय','बहुव्रीहि','द्विगु'],a:2,exp:'चक्र हाथ में है जिसके (= विष्णु) = तीसरे को describe → <b>बहुव्रीहि</b>',tag:'बहुव्रीहि'},
+  {id:15,t:'samas',l:'hard',q:'\'राजकुमार\' में कौन-सा समास है?',o:['कर्मधारय','द्विगु','तत्पुरुष','बहुव्रीहि'],a:2,exp:'राजा का कुमार = \'का\' लगाओ → <b>तत्पुरुष समास</b>',tag:'तत्पुरुष'},
+  // KARAK
+  {id:16,t:'karak',l:'easy',q:'"राम ने रोटी खाई" — \'राम ने\' में कारक?',o:['कर्म','कर्ता','करण','अपादान'],a:1,exp:'क्रिया का करने वाला + ने → <b>कर्ता कारक</b>',tag:'कर्ता कारक'},
+  {id:17,t:'karak',l:'med',q:'"सेना के लिए भोजन" — रेखांकित का कारक?',o:['कर्म','करण','संप्रदान','अपादान'],a:2,exp:'\'के लिए\' = संप्रदान विभक्ति → <b>संप्रदान कारक</b>',tag:'संप्रदान'},
+  {id:18,t:'karak',l:'med',q:'"पेड़ से पत्ता गिरा" — \'पेड़ से\' में कारक?',o:['करण','अपादान','संबंध','अधिकरण'],a:1,exp:'पेड़ से अलग हुआ (अलगाव) → <b>अपादान कारक</b>',tag:'अपादान'},
+  {id:19,t:'karak',l:'hard',q:'"आँखों से देखा" — \'आँखों से\' में कारक?',o:['अपादान','करण','संप्रदान','संबंध'],a:1,exp:'आँखें = देखने का साधन/माध्यम → <b>करण कारक</b>',tag:'करण vs अपादान'},
+  // LING-VACHAN
+  {id:20,t:'lingvachan',l:'easy',q:'\'किताब\' का लिंग क्या है?',o:['पुल्लिंग','स्त्रीलिंग','उभयलिंग','इनमें से कोई नहीं'],a:1,exp:'किताब = स्त्रीलिंग (याद करें — ब्याज, किताब, कलम = स्त्रीलिंग) → <b>स्त्रीलिंग</b>',tag:'लिंग'},
+  {id:21,t:'lingvachan',l:'med',q:'\'लड़की\' का बहुवचन क्या है?',o:['लड़कियाँ','लड़कियें','लड़कीएँ','लड़कियों'],a:0,exp:'ई → इयाँ (बहुवचन नियम) → <b>लड़कियाँ</b>',tag:'वचन'},
+  {id:22,t:'lingvachan',l:'med',q:'\'जनता\' का वचन?',o:['एकवचन','बहुवचन','दोनों','इनमें से कोई नहीं'],a:0,exp:'जनता = समूहवाचक, हमेशा एकवचन → <b>एकवचन</b>',tag:'समूहवाचक'},
+  // KAAL-VACHYA
+  {id:23,t:'kaalvachya',l:'easy',q:'"वह खाना खा रहा है" — काल?',o:['भूतकाल','वर्तमान काल','भविष्यत् काल','संदिग्ध काल'],a:1,exp:'रहा है = चल रही क्रिया → <b>वर्तमान काल</b>',tag:'काल पहचान'},
+  {id:24,t:'kaalvachya',l:'med',q:'"राम द्वारा पत्र लिखा जाता है" — वाच्य?',o:['कर्तृवाच्य','कर्मवाच्य','भाववाच्य','इनमें से कोई नहीं'],a:1,exp:'द्वारा + जाता है = कर्म मुख्य → <b>कर्मवाच्य</b>',tag:'वाच्य'},
+  {id:25,t:'kaalvachya',l:'hard',q:'"मुझसे चला नहीं जाता" — वाच्य?',o:['कर्तृवाच्य','कर्मवाच्य','भाववाच्य','संदिग्ध'],a:2,exp:'न कर्ता मुख्य, न कर्म — केवल भाव → <b>भाववाच्य</b>',tag:'भाववाच्य'},
+  // MUHAVARE
+  {id:26,t:'muhavare',l:'easy',q:'\'दाँत खट्टे करना\' मुहावरे का सही अर्थ?',o:['दाँत दर्द करना','हरा देना/पराजित करना','मीठा खाना','कष्ट देना'],a:1,exp:'परीक्षा में यह = <b>हरा देना / पराजित करना</b>',tag:'मुहावरा अर्थ'},
+  {id:27,t:'muhavare',l:'easy',q:'\'आग बबूला होना\' का अर्थ है?',o:['आग लगाना','बहुत क्रोधित होना','जलना','उत्साहित होना'],a:1,exp:'आग (क्रोध symbol) + बबूला = बहुत गुस्से में → <b>बहुत क्रोधित होना</b>',tag:'मुहावरा'},
+  {id:28,t:'muhavare',l:'med',q:'\'घड़ों पानी पड़ना\' मुहावरे का अर्थ?',o:['बारिश होना','बहुत लज्जित होना','नहाना','शांत होना'],a:1,exp:'पानी पड़ना = लज्जा का प्रतीक → <b>बहुत लज्जित होना</b>',tag:'पानी मुहावरा'},
+  {id:29,t:'muhavare',l:'med',q:'\'लोहे के चने चबाना\' का अर्थ?',o:['लोहा खाना','बहुत कठिन काम करना','मेहनत करना','थक जाना'],a:1,exp:'लोहा = कठिन/असंभव → <b>बहुत कठिन काम करना</b>',tag:'मुहावरा'},
+  {id:30,t:'muhavare',l:'hard',q:'\'आस्तीन का साँप\' मुहावरे का अर्थ?',o:['डरावना आदमी','विश्वासघाती/कपटी मित्र','गुस्सैल व्यक्ति','शत्रु'],a:1,exp:'आस्तीन = बहुत करीब/विश्वासी, साँप = धोखेबाज़ → <b>विश्वासघाती कपटी मित्र</b>',tag:'मुहावरा'},
+  {id:31,t:'muhavare',l:'med',q:'\'हाथ पर हाथ धरना\' का अर्थ?',o:['ताली बजाना','बेकार बैठे रहना','लड़ाई करना','मेहनत करना'],a:1,exp:'हाथ धरना = कुछ न करना → <b>बेकार/निष्क्रिय बैठे रहना</b>',tag:'हाथ मुहावरा'},
+  // PARYAYVACHI
+  {id:32,t:'paryay',l:'easy',q:'\'पानी\' का पर्यायवाची नहीं है?',o:['जल','नीर','वारि','अनिल'],a:3,exp:'अनिल = वायु/हवा का पर्याय है, पानी का नहीं → <b>अनिल</b> सही नहीं',tag:'पर्यायवाची'},
+  {id:33,t:'paryay',l:'easy',q:'\'आँख\' का पर्यायवाची है?',o:['मुख','नयन','श्रवण','नासिका'],a:1,exp:'नयन, नेत्र, लोचन, दृग = आँख के पर्याय → <b>नयन</b>',tag:'पर्यायवाची'},
+  {id:34,t:'paryay',l:'med',q:'\'सूर्य\' का पर्यायवाची नहीं है?',o:['रवि','दिनकर','भानु','शशि'],a:3,exp:'शशि = चंद्रमा का पर्याय → <b>शशि</b> सूर्य का पर्याय नहीं',tag:'पर्यायवाची'},
+  {id:35,t:'paryay',l:'med',q:'\'कमल\' का पर्यायवाची है?',o:['पावक','पद्म','निशाकर','मारुत'],a:1,exp:'पद्म, राजीव, नलिन, सरोज = कमल → <b>पद्म</b>',tag:'पर्यायवाची'},
+  // VILOM
+  {id:36,t:'vilom',l:'easy',q:'\'उचित\' का विलोम शब्द क्या है?',o:['सुचित','अनुचित','विचित','अनचित'],a:1,exp:'उचित का विलोम = अन + उचित = <b>अनुचित</b>',tag:'विलोम'},
+  {id:37,t:'vilom',l:'easy',q:'\'कृतज्ञ\' का विलोम है?',o:['अकृतज्ञ','कृतघ्न','निष्कृत','विकृत'],a:1,exp:'जो उपकार न माने = <b>कृतघ्न</b>',tag:'विलोम'},
+  {id:38,t:'vilom',l:'med',q:'\'आस्तिक\' का विलोम शब्द क्या है?',o:['अनास्तिक','निरास्तिक','नास्तिक','विरास्तिक'],a:2,exp:'ईश्वर में विश्वास न रखे = <b>नास्तिक</b>',tag:'विलोम'},
+  {id:39,t:'vilom',l:'hard',q:'\'स्थावर\' का विलोम है?',o:['जंगम','अस्थावर','चलित','गतिमान'],a:0,exp:'स्थावर = न हिलने वाला। विलोम = <b>जंगम</b> (चलने वाला)',tag:'कठिन विलोम'},
+  // EK SHABD
+  {id:40,t:'ekshabd',l:'easy',q:'\'जो कभी न मरे\' के लिए एक शब्द?',o:['अजर','अमर','अविनाशी','अनंत'],a:1,exp:'मरे नहीं = मृत्यु + अ prefix = <b>अमर</b>',tag:'एक शब्द'},
+  {id:41,t:'ekshabd',l:'med',q:'\'जो पहले कभी न हुआ हो\' के लिए एक शब्द?',o:['अनुपम','अभूतपूर्व','अनोखा','अद्वितीय'],a:1,exp:'भूत = past, पूर्व = before, अभूत+पूर्व = <b>अभूतपूर्व</b>',tag:'एक शब्द'},
+  {id:42,t:'ekshabd',l:'hard',q:'\'जो बहुत कम बोले\' के लिए एक शब्द?',o:['मौनी','अल्पभाषी','मितभाषी','मितव्ययी'],a:2,exp:'मित = कम, भाषी = बोलने वाला → <b>मितभाषी</b>',tag:'एक शब्द'},
+  // VARTANI
+  {id:43,t:'vartani',l:'easy',q:'निम्न में शुद्ध वर्तनी कौन-सी है?',o:['प्रसंसा','प्रशंसा','परसंसा','प्रशंशा'],a:1,exp:'श + अनुस्वार = <b>प्रशंसा</b> (न कि प्रसंसा)',tag:'वर्तनी'},
+  {id:44,t:'vartani',l:'med',q:'शुद्ध शब्द चुनें:',o:['उज्वल','उज्ज्वल','उज्जवल','उजवल'],a:1,exp:'ज् + ज्व = ज्ज्व → <b>उज्ज्वल</b>',tag:'वर्तनी'},
+  {id:45,t:'vartani',l:'hard',q:'शुद्ध शब्द क्या है?',o:['महत्वपूर्ण','महत्त्वपूर्ण','महत्वपूर्ण','महत्तवपूर्ण'],a:1,exp:'महत् + त्व = महत्त्व → <b>महत्त्वपूर्ण</b>',tag:'दोहरे व्यंजन'},
+  // RAS
+  {id:46,t:'ras',l:'easy',q:'युद्ध और वीरता का वर्णन किस रस में होता है?',o:['शृंगार','वीर','रौद्र','अद्भुत'],a:1,exp:'उत्साह/साहस/वीरता = <b>वीर रस</b>',tag:'रस पहचान'},
+  {id:47,t:'ras',l:'easy',q:'\'अनुप्रास\' अलंकार में क्या होता है?',o:['एक अर्थ के दो शब्द','एक ही व्यंजन की आवृत्ति','उपमा देना','प्रश्न पूछना'],a:1,exp:'same consonant repeated = <b>अनुप्रास अलंकार</b>',tag:'अलंकार'},
+  {id:48,t:'ras',l:'med',q:'\'रहिमन पानी राखिए\' में \'पानी\' के कितने अर्थ हैं?',o:['एक','दो','तीन','चार'],a:2,exp:'जल, इज्जत/मान, चमक = <b>तीन अर्थ</b> → श्लेष अलंकार',tag:'श्लेष'},
+  // KAVI
+  {id:49,t:'kavi',l:'easy',q:'\'मधुशाला\' के लेखक कौन हैं?',o:['सुमित्रानंदन पंत','हरिवंश राय बच्चन','जयशंकर प्रसाद','महादेवी वर्मा'],a:1,exp:'हरिवंश राय बच्चन की प्रसिद्ध रचना → <b>हरिवंश राय बच्चन</b>',tag:'कवि-रचना'},
+  {id:50,t:'kavi',l:'easy',q:'\'रामचरितमानस\' के रचनाकार कौन हैं?',o:['कबीरदास','सूरदास','तुलसीदास','मीराबाई'],a:2,exp:'महाकाव्य रामचरितमानस → <b>तुलसीदास</b>',tag:'भक्तिकाल'},
+  {id:51,t:'kavi',l:'med',q:'\'गोदान\' किसकी रचना है?',o:['जयशंकर प्रसाद','प्रेमचंद','निराला','दिनकर'],a:1,exp:'गोदान, गबन, निर्मला = प्रेमचंद → <b>मुंशी प्रेमचंद</b>',tag:'आधुनिक गद्य'},
+  {id:52,t:'kavi',l:'hard',q:'हिंदी साहित्य का सर्वोच्च पुरस्कार कौन-सा है?',o:['साहित्य अकादमी','ज्ञानपीठ पुरस्कार','व्यास सम्मान','पद्म भूषण'],a:1,exp:'भारतीय भाषाओं का सर्वोच्च साहित्य पुरस्कार → <b>ज्ञानपीठ पुरस्कार</b>',tag:'पुरस्कार'},
+  // More questions
+  {id:53,t:'sandhi',l:'med',q:'\'महर्षि\' का संधि-विच्छेद है?',o:['महा + ऋषि','महर् + षि','महा + रषि','मह + ऋषि'],a:0,exp:'महा + ऋषि = आ + ऋ = अर् (गुण संधि) → <b>महा + ऋषि</b>',tag:'गुण संधि'},
+  {id:54,t:'muhavare',l:'hard',q:'\'कमर कसना\' मुहावरे का सही प्रयोग कब होता है?',o:['थका हुआ महसूस करना','किसी काम के लिए तैयार होना','बेल्ट पहनना','चुनौती देना'],a:1,exp:'कमर = तैयारी का प्रतीक → <b>किसी काम के लिए तैयार होना</b>',tag:'मुहावरा प्रयोग'},
+  {id:55,t:'paryay',l:'hard',q:'\'वायु\' का पर्यायवाची नहीं है?',o:['पवन','अनिल','मारुत','तोय'],a:3,exp:'तोय = पानी का पर्याय → <b>तोय</b> वायु का पर्याय नहीं',tag:'पर्यायवाची'},
+  {id:56,t:'samas',l:'med',q:'\'देशभक्त\' में कौन-सा समास है?',o:['द्वंद्व','तत्पुरुष','कर्मधारय','बहुव्रीहि'],a:1,exp:'देश का भक्त = \'का\' → <b>तत्पुरुष समास</b>',tag:'तत्पुरुष'},
+  {id:57,t:'karak',l:'med',q:'"मेरी किताब पर रखी है" — \'पर\' से कौन-सा कारक?',o:['संबंध','अधिकरण','अपादान','करण'],a:1,exp:'पर = अधिकरण विभक्ति (स्थान/समय) → <b>अधिकरण कारक</b>',tag:'अधिकरण'},
+  {id:58,t:'vilom',l:'med',q:'\'सन्मार्ग\' का विलोम है?',o:['असन्मार्ग','दुर्मार्ग','कुमार्ग','अपमार्ग'],a:2,exp:'सन्मार्ग = अच्छा रास्ता → विलोम = <b>कुमार्ग</b>',tag:'विलोम'},
+  {id:59,t:'ras',l:'hard',q:'\'कामायनी\' में मुख्य रस क्या है?',o:['शृंगार','वीर','करुण','शांत'],a:3,exp:'जयशंकर प्रसाद की कामायनी = मनु की कहानी, वैराग्य थीम → <b>शांत रस</b>',tag:'महाकाव्य रस'},
+  {id:60,t:'kavi',l:'med',q:'\'भारत-भारती\' किसकी रचना है?',o:['दिनकर','मैथिलीशरण गुप्त','पंत','बच्चन'],a:1,exp:'राष्ट्रवादी काव्य → <b>मैथिलीशरण गुप्त</b>',tag:'राष्ट्रवादी काव्य'},
+];
+
+// ══════════════════════════════════
+// BUILD TOPIC GRID
+// ══════════════════════════════════
+function buildTopicGrid(){
+  const grid=document.getElementById('tgrid');
+  TOPICS.forEach(t=>{
+    const card=document.createElement('div');
+    card.className='tc';
+    card.style.borderColor=t.color+'44';
+    card.innerHTML=`
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${t.color};border-radius:12px 12px 0 0"></div>
+      <div class="tc-wt" style="background:${t.color}22;color:${t.color}">${t.wt}</div>
+      <div class="tc-icon">${t.icon}</div>
+      <div class="tc-name" style="color:${t.color}">${t.n}</div>
+      <div class="tc-hindi">${t.hi}</div>
+      <div class="tc-qs">${QB.filter(q=>q.t===t.id).length} questions</div>
+    `;
+    card.onclick=()=>openConcept(t.id);
+    grid.appendChild(card);
+  });
+}
+
+function openConcept(id){
+  const t=TOPICS.find(x=>x.id===id);
+  const data=CONCEPTS[id];
+  if(!data) return;
+  document.getElementById('tgrid-wrap').style.display='none';
+  document.getElementById('cpanel').classList.add('open');
+  document.getElementById('cpttl').textContent=data.title;
+  document.getElementById('cpttl').style.color=t.color;
+  let html='';
+  data.cards.forEach((c,i)=>{
+    html+=`<div class="ccard">
+      <div class="ccard-hd" onclick="tglCC(${i})">
+        <div class="ccard-icon">${c.icon}</div>
+        <div class="ccard-ttl">${c.t}</div>
+        <div class="ccard-chev" id="chv${i}">▶</div>
+      </div>
+      <div class="ccard-body" id="ccb${i}">${c.c}</div>
+    </div>`;
+  });
+  document.getElementById('cpContent').innerHTML=html;
+  tglCC(0);
+}
+function tglCC(i){
+  const b=document.getElementById('ccb'+i),c=document.getElementById('chv'+i);
+  b.classList.toggle('open');c.classList.toggle('open');
+}
+function backToTopics(){
+  document.getElementById('tgrid-wrap').style.display='block';
+  document.getElementById('cpanel').classList.remove('open');
+  document.getElementById('mainDiv').scrollTop=0;
+}
+
+// ══════════════════════════════════
+// PRACTICE ENGINE
+// ══════════════════════════════════
+let pDeck=[],pIdx=0,pScore=0,pStreak=0,pCorrect=0;
+let pTopic='all',pMode='timed',pTimer=null,pTLeft=0;
+const MTIMES={timed:25,free:0,hard:10};
+
+function buildTopicSelectRow(){
+  const row=document.getElementById('tselRow');
+  const all=document.createElement('button');
+  all.className='tsb active';all.textContent='🎲 All Mix';
+  all.onclick=()=>setPTopic('all',all);row.appendChild(all);
+  TOPICS.forEach(t=>{
+    const b=document.createElement('button');b.className='tsb';
+    b.textContent=t.icon+' '+t.n.split('-')[0];
+    b.onclick=()=>setPTopic(t.id,b);row.appendChild(b);
+  });
+}
+function setPTopic(id,btn){
+  pTopic=id;
+  document.querySelectorAll('#tselRow .tsb').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');startPractice();
+}
+function setMode(m,btn){
+  pMode=m;
+  document.querySelectorAll('.mode-row .modb').forEach(b=>{b.classList.remove('active');b.style.cssText=''});
+  btn.classList.add('active');startPractice();
+}
+function startPractice(){
+  let pool=pTopic==='all'?QB:QB.filter(q=>q.t===pTopic);
+  pDeck=pool.sort(()=>Math.random()-0.5).slice(0,15);
+  pIdx=0;pScore=0;pStreak=0;pCorrect=0;
+  clearInterval(pTimer);
+  document.getElementById('pres').classList.remove('show');
+  document.getElementById('qaDiv').style.display='block';
+  renderPQ();
+}
+function renderPQ(){
+  const qa=document.getElementById('qaDiv');
+  if(pIdx>=pDeck.length){endPractice();return;}
+  const q=pDeck[pIdx];
+  const t=TOPICS.find(x=>x.id===q.t);
+  document.getElementById('pQ').textContent=`${pIdx+1}/${pDeck.length}`;
+  document.getElementById('pSc').textContent=pScore;
+  document.getElementById('pStr').textContent='🔥'+pStreak;
+  const ol=['अ','ब','स','द'];
+  let html=`<div class="qcard">
+    <span class="qtag" style="background:${t.color}22;color:${t.color}">${q.tag}</span>
+    <span class="qnum">Q${pIdx+1}</span>
+    <div class="qtext">${q.q}</div>
+    <div class="opts">`;
+  q.o.forEach((o,i)=>{
+    html+=`<button class="obt" id="ob${i}" onclick="ansP(${i})">${ol[i]}. ${o}</button>`;
+  });
+  html+=`</div>
+    <div class="expbox" id="exp"><div class="exp-ttl">💡 Explanation</div><div class="exp-txt">${q.exp}</div></div>
+    <button class="nxtbtn" id="nxtBtn" style="display:none" onclick="nextPQ()">NEXT →</button>
+  </div>`;
+  qa.innerHTML=html;
+  if(pMode!=='free') startPTimer();
+  else{document.getElementById('pTm').textContent='∞';document.getElementById('tstrip').style.cssText='width:100%;background:var(--saf)';}
+}
+function startPTimer(){
+  clearInterval(pTimer);
+  const max=MTIMES[pMode]||25;pTLeft=max;updatePTUI(max,max);
+  pTimer=setInterval(()=>{pTLeft--;updatePTUI(pTLeft,max);if(pTLeft<=0){clearInterval(pTimer);ansP(-1);}},1000);
+}
+function updatePTUI(t,max){
+  const p=(t/max)*100;
+  document.getElementById('pTm').textContent=t;
+  document.getElementById('tstrip').style.cssText=`width:${p}%;background:${p<30?'var(--red)':p<60?'var(--yel)':'var(--saf)'}`;
+}
+function ansP(sel){
+  clearInterval(pTimer);
+  const q=pDeck[pIdx];const ok=sel===q.a;
+  document.querySelectorAll('.obt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===q.a)b.classList.add('correct');
+    if(i===sel&&!ok)b.classList.add('wrong');
+  });
+  document.getElementById('exp').classList.add('show');
+  const nb=document.getElementById('nxtBtn');if(nb)nb.style.display='block';
+  flashS(ok);
+  if(ok){pStreak++;pCorrect++;pScore+=10+(pMode==='hard'?Math.floor(pStreak/2)*5:0);}
+  else pStreak=0;
+  document.getElementById('pStr').textContent='🔥'+pStreak;
+  const tid=q.t;
+  if(!progress[tid])progress[tid]={a:0,c:0};
+  progress[tid].a++;if(ok)progress[tid].c++;
+  saveAll();
+}
+function nextPQ(){pIdx++;renderPQ();}
+function endPractice(){
+  clearInterval(pTimer);
+  const pct=Math.round((pCorrect/pDeck.length)*100);
+  const xpE=pScore+(pct>=80?50:pct>=60?25:10);
+  xp+=xpE;saveAll();updXP();
+  document.getElementById('qaDiv').style.display='none';
+  const r=document.getElementById('pres');r.classList.add('show');
+  document.getElementById('resPct').textContent=pct+'%';
+  document.getElementById('resT').textContent=pct>=80?'शानदार! 🔥':pct>=60?'अच्छा प्रयास! 👍':'और अभ्यास करो 📖';
+  document.getElementById('resSc').textContent=`Score: ${pScore} | +${xpE} XP`;
+  document.getElementById('resGrid').innerHTML=`
+    <div class="prc"><div class="prv" style="color:var(--grn)">${pCorrect}</div><div class="prl">सही</div></div>
+    <div class="prc"><div class="prv" style="color:var(--red)">${pDeck.length-pCorrect}</div><div class="prl">गलत</div></div>
+    <div class="prc"><div class="prv" style="color:var(--yel)">${pct}%</div><div class="prl">Accuracy</div></div>
+  `;
+  showToast(`+${xpE} XP! 🎉`);
+}
+function restartP(){startPractice();}
+
+// ══════════════════════════════════
+// OMR ENGINE
+// ══════════════════════════════════
+let oDeck=[],oAnss=[],oFlags=[],oIdx=0,oTimer=null,oTLeft=30*60;
+const OMR_N=37;
+
+function startOMR(){
+  oDeck=[...QB].sort(()=>Math.random()-0.5).slice(0,OMR_N);
+  oAnss=new Array(OMR_N).fill(-1);oFlags=new Array(OMR_N).fill(false);
+  oIdx=0;oTLeft=30*60;
+  document.getElementById('omrSetup').style.display='none';
+  document.getElementById('omrExam').classList.add('active');
+  document.getElementById('omrRes').classList.remove('show');
+  buildODots();renderOQ();startOTimer();
+}
+function buildODots(){
+  const d=document.getElementById('odots');d.innerHTML='';
+  for(let i=0;i<OMR_N;i++){
+    const dot=document.createElement('div');dot.className='odot'+(i===0?' cur':'');
+    dot.id='od_'+i;dot.onclick=()=>jumpO(i);d.appendChild(dot);
+  }
+}
+function renderOQ(){
+  const q=oDeck[oIdx];const t=TOPICS.find(x=>x.id===q.t);
+  document.getElementById('oqn').textContent=`${oIdx+1}/${OMR_N}`;
+  document.getElementById('oAns').textContent=`${oAnss.filter(a=>a!==-1).length}/${OMR_N}`;
+  document.getElementById('opfill').style.width=((oIdx+1)/OMR_N*100)+'%';
+  document.getElementById('oqtag').textContent=t.n;
+  document.getElementById('oqtag').style.cssText=`background:${t.color}22;color:${t.color};display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px`;
+  document.getElementById('oqtext').textContent=q.q;
+  const ol=['A','B','C','D'];
+  let html='';
+  q.o.forEach((o,i)=>{
+    const sel=oAnss[oIdx]===i;
+    html+=`<div class="omr-opt${sel?' sel':''}" onclick="selOOpt(${i})">
+      <div class="omr-bub">${ol[i]}</div>
+      <div class="omr-otxt">${o}</div>
+    </div>`;
+  });
+  document.getElementById('obubs').innerHTML=html;
+  document.getElementById('oflagBtn').className='oflag'+(oFlags[oIdx]?' flg':'');
+  for(let i=0;i<OMR_N;i++){
+    const d=document.getElementById('od_'+i);if(!d)continue;
+    d.className='odot';
+    if(oAnss[i]!==-1)d.classList.add('ans');
+    if(oFlags[i])d.classList.add('flg');
+    if(i===oIdx)d.classList.add('cur');
+  }
+}
+function selOOpt(i){oAnss[oIdx]=i;renderOQ();}
+function oNav(dir){const n=oIdx+dir;if(n<0||n>=OMR_N)return;oIdx=n;renderOQ();document.getElementById('mainDiv').scrollTop=0;}
+function jumpO(i){oIdx=i;renderOQ();}
+function oToggleFlag(){oFlags[oIdx]=!oFlags[oIdx];renderOQ();}
+function startOTimer(){
+  clearInterval(oTimer);
+  oTimer=setInterval(()=>{
+    oTLeft--;
+    const m=Math.floor(oTLeft/60),s=oTLeft%60;
+    const el=document.getElementById('otimer');
+    el.textContent=`${m}:${String(s).padStart(2,'0')}`;
+    if(oTLeft<300)el.className='otimer warn';
+    if(oTLeft<60)el.className='otimer danger';
+    if(oTLeft<=0){clearInterval(oTimer);submitOMR();}
+  },1000);
+}
+function submitOMR(){
+  clearInterval(oTimer);
+  let c=0,att=0;
+  oDeck.forEach((q,i)=>{if(oAnss[i]!==-1){att++;if(oAnss[i]===q.a)c++;}});
+  const score=c*2,pct=Math.round(c/OMR_N*100);
+  xp+=score*2;saveAll();updXP();
+  omrHist.unshift({d:new Date().toLocaleDateString('en-IN'),c,att,total:OMR_N,score,pct});
+  if(omrHist.length>5)omrHist.pop();saveAll();
+  document.getElementById('omrExam').classList.remove('active');
+  const res=document.getElementById('omrRes');res.classList.add('show');
+  const em=pct>=90?'🏆':pct>=70?'😃':pct>=50?'🙂':'📖';
+  document.getElementById('omrEmoji').textContent=em;
+  document.getElementById('omrResT').textContent=pct>=80?'शानदार!':pct>=60?'अच्छा प्रयास!':'और मेहनत करो!';
+  document.getElementById('omrResSc').textContent=`Score: ${score}/74 (${pct}%)`;
+  document.getElementById('omrResGrid').innerHTML=`
+    <div class="prc"><div class="prv" style="color:var(--grn)">${c}</div><div class="prl">Correct</div></div>
+    <div class="prc"><div class="prv" style="color:var(--red)">${att-c}</div><div class="prl">Wrong</div></div>
+    <div class="prc"><div class="prv" style="color:var(--yel)">${OMR_N-att}</div><div class="prl">Skipped</div></div>
+  `;
+  let sh='';
+  oDeck.forEach((q,i)=>{
+    const ol=['A','B','C','D'],ua=oAnss[i];
+    let bubs='';
+    q.o.forEach((_,j)=>{
+      let cls='sbub';
+      if(j===ua&&j===q.a)cls+=' c';
+      else if(j===ua&&j!==q.a)cls+=' w';
+      else if(j===q.a&&ua!==-1)cls+=' c';
+      bubs+=`<div class="${cls}">${ol[j]}</div>`;
+    });
+    const st=ua===-1?'⬜':ua===q.a?'✅ +2':'❌ 0';
+    const sc=ua===-1?'color:var(--td)':ua===q.a?'color:var(--grn)':'color:var(--red)';
+    sh+=`<div class="srow"><div class="sqn">Q${i+1}</div><div class="sbubs">${bubs}</div><div class="sstatus" style="${sc}">${st}</div></div>`;
+  });
+  document.getElementById('oSheet').innerHTML=sh;
+  document.getElementById('mainDiv').scrollTop=0;
+}
+function resetOMR(){
+  document.getElementById('omrRes').classList.remove('show');
+  document.getElementById('omrExam').classList.remove('active');
+  document.getElementById('omrSetup').style.display='block';
+  if(omrHist.length>0){
+    const l=omrHist[0];
+    document.getElementById('prevResult').style.display='block';
+    document.getElementById('prevStats').innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+      <div style="text-align:center;background:var(--bg4);border-radius:8px;padding:9px"><div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--yel)">${l.score}/74</div><div style="font-size:10px;color:var(--td)">Score</div></div>
+      <div style="text-align:center;background:var(--bg4);border-radius:8px;padding:9px"><div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--grn)">${l.c}/${OMR_N}</div><div style="font-size:10px;color:var(--td)">Correct</div></div>
+      <div style="text-align:center;background:var(--bg4);border-radius:8px;padding:9px"><div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--saf)">${l.pct}%</div><div style="font-size:10px;color:var(--td)">${l.d}</div></div>
+    </div>`;
+  }
+}
+
+// ══════════════════════════════════
+// PROGRESS
+// ══════════════════════════════════
+function renderProgress(){
+  const ta=Object.values(progress).reduce((a,b)=>a+b.a,0);
+  const tc=Object.values(progress).reduce((a,b)=>a+b.c,0);
+  const op=ta>0?Math.round(tc/ta*100):0;
+  const bs=omrHist.length>0?Math.max(...omrHist.map(x=>x.score)):0;
+  document.getElementById('psSummary').innerHTML=`
+    <div class="psc"><div class="psv" style="color:var(--yel)">${xp}</div><div class="psl">Total XP</div></div>
+    <div class="psc"><div class="psv" style="color:var(--saf)">${op}%</div><div class="psl">Accuracy</div></div>
+    <div class="psc"><div class="psv" style="color:var(--grn)">${ta}</div><div class="psl">Qs Done</div></div>
+    <div class="psc"><div class="psv" style="color:var(--prpl)">${bs}</div><div class="psl">Best OMR</div></div>
+  `;
+  let bars='';
+  TOPICS.forEach(t=>{
+    const p=progress[t.id]||{a:0,c:0};
+    const pct=p.a>0?Math.round(p.c/p.a*100):0;
+    bars+=`<div class="pbrow">
+      <div class="pbrl"><span class="pbrt">${t.icon} ${t.n}</span><span class="pbrp" style="color:${t.color}">${p.a?pct+'%':'—'}</span></div>
+      <div class="pbar"><div class="pbfill" style="width:${pct}%;background:${t.color}"></div></div>
+    </div>`;
+  });
+  document.getElementById('topicBars').innerHTML=bars;
+}
+
+// ══════════════════════════════════
+// NAV
+// ══════════════════════════════════
+function showSec(n,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+n).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('mainDiv').scrollTop=0;
+  if(n==='progress')renderProgress();
+  if(n==='practice'&&pDeck.length===0)startPractice();
+  if(n==='omr')resetOMR();
+}
+// UTILS
+function flashS(ok){const el=document.getElementById('flash');el.className='flash '+(ok?'c':'w')+' show';setTimeout(()=>el.classList.remove('show'),250);}
+let tT;
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),2500);}
+function resetAll(){if(!confirm('Reset all progress?'))return;xp=0;progress={};omrHist=[];saveAll();updXP();renderProgress();showToast('Reset done.');}
+// INIT
+function init(){updXP();buildTopicGrid();buildTopicSelectRow();startPractice();resetOMR();}
+init();
+</script>
+</body>
+</html>
